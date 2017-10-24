@@ -1,7 +1,7 @@
 package net.npaka.obakecamera;
+
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -300,7 +300,7 @@ public class CameraView extends TextureView {
         try {
             //出力先となるイメージリーダーの準備
             ImageReader reader = ImageReader.newInstance(
-                pictureSize.getWidth(), pictureSize.getHeight(),
+                pictureSize.getWidth()*2, pictureSize.getHeight()*2,
                 ImageFormat.JPEG, 2);
             reader.setOnImageAvailableListener(
                 new ImageReader.OnImageAvailableListener() {
@@ -312,7 +312,7 @@ public class CameraView extends TextureView {
                         //画像のバイト配列の取得
                         image = reader.acquireLatestImage();
                         byte[] data = image2data(image);
-
+/*
                         //写真サイズの調整(2)
                         int pw = previewSize.getWidth(); //写真幅
                         int ph = pictureSize.getHeight();//写真高さ
@@ -320,7 +320,7 @@ public class CameraView extends TextureView {
                         int dw = sw;                     //切取先幅
                         int dh = sw*viewH/viewW;         //切取先高さ
                         Bitmap bmp = Util.data2bmp(data);
-                        bmp = Util.cutBitmap(bmp, dw, dh);
+                        //bmp = Util.cutBitmap(bmp, dw, dh);
 
                         //写真の反転(3)
                         if (front) bmp = Util.flipBitmap(bmp);
@@ -328,7 +328,7 @@ public class CameraView extends TextureView {
                         //おばけの追加
 
                         data = Util.bmp2data(bmp);
-
+*/
                         //写真の保存
                         savePhoto(data);
                     } catch (Exception e) {
